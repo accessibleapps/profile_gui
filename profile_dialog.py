@@ -15,7 +15,7 @@ class ProfileActions(wx_forms.AutoSizedPanel):
 
  def handle_update_stats(self):
   stats = yappi.get_stats()
-  stats.sort(self.parent.sort_field.get_index(), 1)
+  stats.sort(self.parent.sort_order.get_index(), 1)
   func_stats = stats.func_stats[:50]
   self.parent.stats.set_items(func_stats)
 
