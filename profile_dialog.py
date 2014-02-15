@@ -29,6 +29,12 @@ class ProfileActions(wx_forms.AutoSizedPanel):
  stop = fields.Button(label="St&op", callback=handle_stop, enabled=False)
  update_stats = fields.Button(label="&Update Statistics", callback=handle_update_stats)
 
+ def render(self, *args, **kwargs):
+  super(ProfileActions, self).render(*args, **kwargs)
+  if yappi.is_running:
+   self.start.disable()
+   self.stop.enable()
+
 class StatsList(wx_forms.SmartList):
  name = wx_fields.SmartColumn(title="name", model_field=0)
  ncalls = wx_fields.SmartColumn(title="Number of Calls", model_field=1)
