@@ -8,9 +8,13 @@ class ProfileActions(wx_forms.AutoSizedPanel):
 
  def handle_start(self):
   yappi.start()
+  self.start.disable()
+  self.stop.enable()
 
  def handle_stop(self):
   yappi.stop()
+  self.start.enable()
+  self.stop.disable()
 
 
  def handle_update_stats(self):
@@ -19,9 +23,8 @@ class ProfileActions(wx_forms.AutoSizedPanel):
   func_stats = stats.func_stats[:50]
   self.parent.stats.set_items(func_stats)
 
-
  start = fields.Button(label="&Start", callback=handle_start)
- stop = fields.Button(label="St&op", callback=handle_stop)
+ stop = fields.Button(label="St&op", callback=handle_stop, enabled=False)
  update_stats = fields.Button(label="&Update Statistics", callback=handle_update_stats)
 
 class StatsList(wx_forms.SmartList):
