@@ -34,6 +34,6 @@ class StatsList(wx_forms.SmartList):
 
 class ProfileDialog(wx_forms.AutoSizedDialog):
  stats = StatsList(label="Stats")
- sort_order = fields.ComboBox(label="Sort", choices=FIELDS)
+ sort_order = fields.ComboBox(label="Sort", choices=FIELDS, read_only=True)
  actions = ProfileActions(sizer_type='horizontal')
  close = fields.ButtonSizer(close=True)
