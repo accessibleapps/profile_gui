@@ -31,7 +31,7 @@ class ProfileActions(wx_forms.AutoSizedPanel):
 
  def render(self, *args, **kwargs):
   super(ProfileActions, self).render(*args, **kwargs)
-  if yappi.is_running:
+  if yappi.is_running():
    self.start.disable()
    self.stop.enable()
 
