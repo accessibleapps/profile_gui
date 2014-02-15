@@ -16,12 +16,13 @@ class ProfileActions(wx_forms.AutoSizedPanel):
   self.start.enable()
   self.stop.disable()
 
-
  def handle_update_stats(self):
   stats = yappi.get_stats()
   stats.sort(self.parent.sort_order.get_index(), 1)
-  func_stats = stats.func_stats[:50]
-  self.parent.stats.set_items(func_stats)
+  func_stats = stats.func_stats
+  if len(func_stats) > 50:
+   func_stats = func_stats[:50]
+  self.parent.stats.set_value(func_stats)
 
  start = fields.Button(label="&Start", callback=handle_start)
  stop = fields.Button(label="St&op", callback=handle_stop, enabled=False)
