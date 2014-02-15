@@ -23,6 +23,7 @@ class ProfileActions(wx_forms.AutoSizedPanel):
   if len(func_stats) > 50:
    func_stats = func_stats[:50]
   self.parent.stats.set_value(func_stats)
+  self.parent.stats.set_index(0)
 
  start = fields.Button(label="&Start", callback=handle_start)
  stop = fields.Button(label="St&op", callback=handle_stop, enabled=False)
