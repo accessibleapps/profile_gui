@@ -44,7 +44,11 @@ class StatsList(wx_forms.SmartList):
 
 
 class ProfileGui(wx_forms.AutoSizedFrame):
+
+ def handle_close(self):
+  self.destroy()
+
  stats = StatsList(label="Stats")
  sort_order = fields.ComboBox(label="Sort", choices=FIELDS, read_only=True)
  actions = ProfileActions(sizer_type='horizontal')
- close = fields.Button(close=True)
+ close = fields.Button(close=True, callback=handle_close)
