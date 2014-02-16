@@ -37,7 +37,7 @@ class ProfileActions(wx_forms.AutoSizedPanel):
 
 class StatsList(wx_forms.SmartList):
  name = wx_fields.SmartColumn(title="name", model_field='name')
- ncalls = wx_fields.SmartColumn(title="Number of Calls", model_field='ncall')
+ ncalls = wx_fields.SmartColumn(title="Number of Calls", model_field='nactualcall')
  total_time = wx_fields.SmartColumn(title="Total Time", model_field='ttot')
  sub = wx_fields.SmartColumn(title="Sub", model_field='tsub')
  average_time = wx_fields.SmartColumn(title="Average Time", model_field='tavg')
