@@ -25,8 +25,13 @@ class ProfileActions(wx_forms.AutoSizedPanel):
   self.parent.stats.set_value(func_stats)
   self.parent.stats.set_index(0)
 
+ def handle_clear(self):
+  yappi.clear_stats()
+  self.parent.stats.clear()
+
  start = fields.Button(label="&Start", callback=handle_start)
  stop = fields.Button(label="St&op", callback=handle_stop, enabled=False)
+ clear = fields.Button(label="&Clear", callback=handle_clear)
  update_stats = fields.Button(label="&Update Statistics", callback=handle_update_stats)
 
  def render(self, *args, **kwargs):
