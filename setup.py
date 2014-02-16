@@ -4,10 +4,10 @@ __version__ = "0.1"
 __doc__ = """Quickly profile GUI applications"""
 
 setup(
- name = "profile_dialog",
+ name = "profile_gui",
  version = __version__,
  description = __doc__,
- py_modules = ['profile_dialog'],
+ py_modules = ['profile_gui'],
  install_requires = [
   'yappi',
   #'wxpython',

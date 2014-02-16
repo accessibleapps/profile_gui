@@ -43,8 +43,8 @@ class StatsList(wx_forms.SmartList):
  average_time = wx_fields.SmartColumn(title="Average Time", model_field=4)
 
 
-class ProfileDialog(wx_forms.AutoSizedDialog):
+class ProfileGui(wx_forms.AutoSizedFrame):
  stats = StatsList(label="Stats")
  sort_order = fields.ComboBox(label="Sort", choices=FIELDS, read_only=True)
  actions = ProfileActions(sizer_type='horizontal')
- close = fields.ButtonSizer(close=True)
+ close = fields.Button(close=True)
