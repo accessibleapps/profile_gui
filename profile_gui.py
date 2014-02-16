@@ -3,6 +3,7 @@ from wx_utils import fields as wx_fields, forms as wx_forms
 import yappi
 
 FIELDS = ["Name", "Number of Calls", "Total Time", "Sub", "Average Time"]
+SORT_ORDERS = ["name", "callcount", "totaltime", "subtime", "avgtime"]
 
 class ProfileActions(wx_forms.AutoSizedPanel):
 
@@ -17,9 +18,8 @@ class ProfileActions(wx_forms.AutoSizedPanel):
   self.stop.disable()
 
  def handle_update_stats(self):
-  stats = yappi.get_stats()
-  stats.sort(self.parent.sort_order.get_index(), 1)
-  func_stats = stats.func_stats
+  func_stats = yappi.get_func_stats()
+  func_stats.sort(SORT_ORDERS[self.parent.sort_order.get_index()], 'desc')
   if len(func_stats) > 50:
    func_stats = func_stats[:50]
   self.parent.stats.set_value(func_stats)
@@ -36,11 +36,11 @@ class ProfileActions(wx_forms.AutoSizedPanel):
    self.stop.enable()
 
 class StatsList(wx_forms.SmartList):
- name = wx_fields.SmartColumn(title="name", model_field=0)
- ncalls = wx_fields.SmartColumn(title="Number of Calls", model_field=1)
- total_time = wx_fields.SmartColumn(title="Total Time", model_field=2)
- sub = wx_fields.SmartColumn(title="Sub", model_field=3)
- average_time = wx_fields.SmartColumn(title="Average Time", model_field=4)
+ name = wx_fields.SmartColumn(title="name", model_field='name')
+ ncalls = wx_fields.SmartColumn(title="Number of Calls", model_field='ncall')
+ total_time = wx_fields.SmartColumn(title="Total Time", model_field='ttot')
+ sub = wx_fields.SmartColumn(title="Sub", model_field='tsub')
+ average_time = wx_fields.SmartColumn(title="Average Time", model_field='tavg')
 
 
 class ProfileGui(wx_forms.AutoSizedFrame):
