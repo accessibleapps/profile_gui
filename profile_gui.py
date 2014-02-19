@@ -57,6 +57,17 @@ class StatsPanel(wx_forms.AutoSizedPanel):
   self.stats.set_value(func_stats)
   self.stats.set_index(0)
 
+ def handle_activate(self):
+  item = self.stats.get_selected_model()
+  if not hasattr(item, 'children'):
+   item = [new_item for new_item in yappi.get_func_stats() if new_item.full_name == item.full_name][0]
+  dlg = ChildrenDialog(parent=self.parent, item=item, title="Children")
+  dlg.display_modal()
+
+ def render(self):
+  super(StatsPanel, self).render()
+  self.stats.register_callback('item_activated', self.handle_activate)
+
  stats = StatsList(label="Stats")
  sort_order = fields.ComboBox(label="Sort", choices=FIELDS, read_only=True)
  update_stats = fields.Button(label="&Update Statistics", callback=handle_update_stats)
@@ -70,3 +81,15 @@ class ProfileGui(wx_forms.AutoSizedFrame):
 
  actions = ProfileActions(sizer_type='horizontal')
  close = fields.Button(close=True, callback=handle_close)
+
+class ChildrenDialog(wx_forms.AutoSizedDialog):
+
+ def __init__(self, item=None, *args, **kwargs):
+  super(ChildrenDialog, self).__init__(*args, **kwargs)
+  self.stats_panel.function = lambda: item.children
+
+ def render(self):
+  super(ChildrenDialog, self).render()
+  self.stats_panel.handle_update_stats()
+
+ stats_panel = StatsPanel()
