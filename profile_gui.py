@@ -93,3 +93,4 @@ class ChildrenDialog(wx_forms.AutoSizedDialog):
   self.stats_panel.handle_update_stats()
 
  stats_panel = StatsPanel()
+ close = fields.ButtonSizer(close=True)
